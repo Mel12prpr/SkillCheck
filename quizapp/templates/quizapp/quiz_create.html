@@ -1,0 +1,37 @@
+<!-- templates/quizapp/quiz_create.html -->
+{% extends 'home/index.html' %}
+{% load static %}
+
+{% block description_and_cta %}
+    <!-- Empty block to avoid rendering description and CTA button -->
+{% endblock %}
+
+{% block content %}
+    <div class="quiz-submissions-section">
+        <div class="quiz-submissions-header">
+            <h2 class="quiz-submissions-title">Create a New Quiz</h2>
+            <p class="quiz-submissions-subtitle">Fill out the form to start building your custom quiz.</p>
+        </div>
+
+        <div class="quiz-submissions-table-wrapper">
+            <form method="post" class="quiz-form" id="quizForm">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="quiz-submit-btn">Create Quiz</button>
+            </form>
+            <p id="formError" class="form-error"></p>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block extra_js %}
+    <script src="{% static 'quizapp/js/script.js' %}"></script>
+{% endblock %}
+
+
+
+
+
+
+

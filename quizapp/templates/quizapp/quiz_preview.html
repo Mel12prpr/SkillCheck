@@ -1,0 +1,18 @@
+{% extends 'home/index.html' %}
+
+{% block description_and_cta %}
+{% endblock %}
+
+{% block quizzes %}
+{% endblock %}
+
+{% block content %}
+<div class="quiz-detail-container">
+    <h1 class="quiz-topic">{{ quiz.topic }}</h1>
+    <h3 class="quiz-subtitle">Quiz about <span class="focus-area">{{ quiz.focus_area }}</span> by <span class="creator">{{ quiz.creator.username }}</span></h3>
+    <p class="num-questions">Number of questions: <strong>{{ num }}</strong></p>
+    <a href="/quiz/take/{{ quiz.id }}" class="take-quiz-btn">Take Quiz</a>
+</div>
+{% endblock content %}
+
+

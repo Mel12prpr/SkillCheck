@@ -1,0 +1,43 @@
+{% extends 'home/index.html' %}
+{% block description_and_cta %}
+{% endblock description_and_cta %}
+
+{% block content %}
+<section class="quiz-submissions-section container">
+  <div class="quiz-submissions-header" data-aos="fade-up">
+    <h2 class="quiz-submissions-title">Attempts on quiz about {{ quiz.focus_area }}</h2>
+    <p class="quiz-submissions-subtitle">Review all participant scores and answers for this quiz.</p>
+  </div>
+
+  <div class="quiz-submissions-table-block" data-aos="fade-up" data-aos-delay="100">
+    <div class="quiz-submissions-table-wrapper">
+      <table class="quiz-submissions-table">
+        <thead>
+          <tr>
+            <th>Attempt By</th>
+            <th>Score</th>
+            <th>Answers</th>
+            <th>Submitted At</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if quiz %}
+          {% for attempt in quiz.attempts.all %}
+          <tr>
+            <td>{{ attempt.user.username }}</td>
+            <td>{{ attempt.score }}</td>
+            <td><a href="/quiz/attempt/{{ attempt.id }}" class="quiz-link">See Answers</a></td>
+            <td>{{ attempt.submitted_at }}</td>
+          </tr>
+          {% endfor %}
+          {% else %}
+          <tr>
+            <td colspan="4" class="no-quizzes">No one has attempted this quiz yet.</td>
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock content %}

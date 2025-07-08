@@ -1,0 +1,73 @@
+{% extends 'home/index.html' %}
+
+{% block description_and_cta %}
+{% endblock description_and_cta %}
+
+{% block content %}
+<section class="available-quizzes-section container">
+  <div class="available-quizzes-header" data-aos="fade-up">
+    <h2 class="available-quizzes-title">Available Quizzes</h2>
+    <p class="available-quizzes-subtitle">Browse public quizzes, filter by difficulty or number of questions, and test your skills.</p>
+  </div>
+
+  <div class="available-quizzes-filter" data-aos="fade-up" data-aos-delay="100">
+    <form method="get" action="{% url 'quizzes' %}">
+      <label for="difficulty">Difficulty:</label>
+      <select name="difficulty" id="difficulty">
+        <option value="">Select Difficulty</option>
+        <option value="Easy" {% if request.GET.difficulty == "Easy" %}selected{% endif %}>Easy</option>
+        <option value="Medium" {% if request.GET.difficulty == "Medium" %}selected{% endif %}>Medium</option>
+        <option value="Hard" {% if request.GET.difficulty == "Hard" %}selected{% endif %}>Hard</option>
+      </select>
+
+      <label for="num_questions">Min Questions:</label>
+      <input type="number" name="num_questions" id="num_questions" min="0" max="20" value="{{ request.GET.num_questions }}">
+
+      <button type="submit" class="btn-primary">Filter</button>
+    </form>
+  </div>
+
+  <div class="available-quizzes-table-block" data-aos="fade-up" data-aos-delay="150">
+    <div class="available-quizzes-table-wrapper">
+      <table class="available-quizzes-table">
+        <thead>
+          <tr>
+            <th>Topic</th>
+            <th>Author</th>
+            <th>Difficulty</th>
+            <th>Questions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if page_obj %}
+          {% for quiz in page_obj %}
+          <tr>
+            <td><a href="/quiz/{{ quiz.id }}" class="quiz-link">{{ quiz.topic }}</a></td>
+            <td>{{ quiz.creator.username }}</td>
+            <td>{{ quiz.difficulty|title }}</td>
+            <td>{{ quiz.num_questions }}</td>
+          </tr>
+          {% endfor %}
+          {% else %}
+          <tr>
+            <td colspan="4" class="no-quizzes">No quizzes available.</td>
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="pagination" data-aos="fade-up" data-aos-delay="200">
+    <span class="step-links">
+      {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+      <span class="current">{{ num }}</span>
+      {% else %}
+      <a href="?page={{ num }}{% if request.GET.difficulty %}&difficulty={{ request.GET.difficulty }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.num_questions %}&num_questions={{ request.GET.num_questions }}{% endif %}">{{ num }}</a>
+      {% endif %}
+      {% endfor %}
+    </span>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'home/index.html' %}
+
+{% block description_and_cta %}
+{% endblock %}
+
+{% block content %}
+<h2>Generated Questions for Quiz: {{ quiz.topic }}</h2>
+<div class="no-copy">
+{% if questions %}
+    <h3>Focus Area: {{ questions.0.focus_area }}</h3>
+    <ul>
+        {% for question in questions %}
+            <li>
+                <strong>Question {{ forloop.counter }}:</strong>
+                <p>{{ question.question_text }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No questions generated yet.</p>
+{% endif %}
+</div>
+<div class="quiz-button-group">
+    <a href="{% url 'take_quiz' quiz.id %}" class="btn-take-quiz">Take Quiz</a>
+    <a href="{% url 'quiz_create' %}" class="btn-outline">Create Another Quiz</a>
+</div>
+
+{% endblock %}

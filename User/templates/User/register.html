@@ -1,0 +1,70 @@
+{% extends 'home/index.html' %}
+{% load static %}
+
+{% block content %}
+<div class="register-container">
+    <h2>Create an Account</h2>
+    <form method="POST" class="register-form" id="registerForm" novalidate>
+        {% csrf_token %}
+
+        <!-- Username -->
+        <div class="form-group">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            <div class="error-message" id="usernameError"></div>
+        </div>
+
+        <!-- First Name -->
+        <div class="form-group">
+            {{ form.first_name.label_tag }}
+            {{ form.first_name }}
+            <div class="error-message" id="firstNameError"></div>
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group">
+            {{ form.last_name.label_tag }}
+            {{ form.last_name }}
+            <div class="error-message" id="lastNameError"></div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            <div class="error-message" id="emailError"></div>
+        </div>
+
+                <!-- Password -->
+        <div class="form-group">
+            {{ form.password1.label_tag }}
+            {{ form.password1 }}
+            <div class="show-password">
+                <input type="checkbox" id="togglePassword1">
+                <label for="togglePassword1">Show Password</label>
+            </div>
+            <div class="error-message" id="password1Error"></div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+            {{ form.password2.label_tag }}
+            {{ form.password2 }}
+            <div class="show-password">
+                <input type="checkbox" id="togglePassword2">
+                <label for="togglePassword2">Show Password</label>
+            </div>
+            <div class="error-message" id="password2Error"></div>
+        </div>
+
+
+        <button type="submit" class="submit-btn">Register</button>
+    </form>
+
+    <p class="login-link">Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'quizapp/js/script.js' %}"></script>
+{% endblock %}

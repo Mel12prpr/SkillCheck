@@ -1,0 +1,46 @@
+{% extends 'home/index.html' %}
+
+{% block description_and_cta %}
+{% endblock description_and_cta %}
+
+{% block content %}
+<section class="my-quizzes-section container">
+  <div class="my-quizzes-header" data-aos="fade-up">
+    <h2 class="my-quizzes-title">My Quizzes</h2>
+    <p class="my-quizzes-subtitle">Here are the quizzes you've created. Track, edit, or view attempts with ease.</p>
+  </div>
+
+  <div class="my-quizzes-table-block" data-aos="fade-up" data-aos-delay="100">
+    {% if quizzes %}
+    <div class="my-quizzes-table-wrapper">
+      <table class="my-quizzes-table">
+        <thead>
+          <tr>
+            <th>Topic</th>
+            <th>Author</th>
+            <th>Attempts</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for quiz in quizzes %}
+          <tr>
+            <td><a class="quiz-link" href="/quiz/{{ quiz.id }}">{{ quiz.topic }}</a></td>
+            <td>{{ quiz.creator.username }}</td>
+            <td><a class="quiz-link" href="/quiz/{{ quiz.id }}/attempts">Attempts</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="my-quizzes-empty" data-aos="fade-up" data-aos-delay="150">
+      <p>No quizzes available yet. Create your first quiz below!</p>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="my-quizzes-cta" data-aos="zoom-in" data-aos-delay="200">
+    <a href="/quiz/create/" class="btn-primary">Create New Quiz</a>
+  </div>
+</section>
+{% endblock %}

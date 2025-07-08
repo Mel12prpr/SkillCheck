@@ -1,0 +1,44 @@
+{% extends 'home/index.html' %}
+
+{% block description_and_cta %}
+{% endblock description_and_cta %}
+
+{% block content %}
+<section class="my-attempts-section container">
+  <div class="my-attempts-header" data-aos="fade-up">
+    <h2 class="my-attempts-title">My Attempts</h2>
+    <p class="my-attempts-subtitle">View your quiz history, scores, and submitted answers.</p>
+  </div>
+
+  <div class="my-attempts-table-block" data-aos="fade-up" data-aos-delay="100">
+    {% if attempts %}
+    <div class="my-attempts-table-wrapper">
+      <table class="my-attempts-table">
+        <thead>
+          <tr>
+            <th>Quiz</th>
+            <th>Score</th>
+            <th>Answers</th>
+            <th>Submitted At</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for attempt in attempts %}
+          <tr>
+            <td><a class="attempt-link" href="/quiz/{{ attempt.quiz.id }}">{{ attempt.quiz.focus_area }}</a></td>
+            <td>{{ attempt.score }}</td>
+            <td><a class="attempt-link" href="/quiz/attempt/{{ attempt.id }}">See Answers</a></td>
+            <td>{{ attempt.submitted_at }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="my-attempts-empty" data-aos="fade-up" data-aos-delay="150">
+      <p>No attempts available yet. Try taking a quiz to get started!</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

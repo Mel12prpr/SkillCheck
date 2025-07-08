@@ -1,0 +1,32 @@
+{% extends 'home/index.html' %}
+
+{% block description_and_cta %}
+    <!-- Empty block -->
+{% endblock %}
+
+{% block content %}
+<div class="quiz-result-container">
+    <h1 class="quiz-focus-area">Quiz about {{ quiz.focus_area }}</h1>
+
+    {% for question in questions %}
+    <div class="question-block {% if question.2 == 0 %}incorrect{% else %}correct{% endif %}">
+        <h3 class="question-title">Question {{ forloop.counter }}:</h3>
+        <p class="question-text">{{ question.0.question_text }}</p>
+        <p class="user-answer"><strong>Your answer:</strong> {{ question.1 }}</p>
+        <p class="result">
+            <strong>Result:</strong>
+            {% if question.2 == 1 %}
+                Correct
+            {% else %}
+                Incorrect
+            {% endif %}
+        </p>
+        {% if question.2 == 0 %}
+        <p class="correct-answer"><strong>Correct answer:</strong> {{ question.3 }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <p class="final-result">Final result: <span>{{ mark }}/{{ total }}</span></p>
+</div>
+{% endblock %}

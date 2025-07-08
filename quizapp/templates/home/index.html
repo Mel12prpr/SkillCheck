@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillCheck</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="{% static 'quizapp/css/style.css' %}" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true
+      });
+    });
+  </script>
+</head>
+<body class="theme-gradient">
+
+  <div class="page-wrapper">
+    <!-- Navbar -->
+  {% if request.resolver_match.url_name not in 'register login' %}
+
+    <nav class="navbar">
+      <div class="nav-container">
+        <h1 class="logo">SkillCheck</h1>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+          <li><a href="{% url 'quizzes' %}" class="{% if request.path == '/quizzes/' %}active{% endif %}">Quizzes</a></li>
+          <li><a href="/my-quizzes/" class="{% if request.path == '/my-quizzes/' %}active{% endif %}">My Quizzes</a></li>
+          <li><a href="{% url 'my_attempts' %}" class="{% if request.path == '/my-attempts/' %}active{% endif %}">My Attempts</a></li>
+          <li><a href="/about/" class="{% if request.path == '/about/' %}active{% endif %}">About</a></li>
+
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+          {% else %}
+            <li><a href="{% url 'login' %}" class="{% if request.path == '/login/' %}active{% endif %}">Log In</a></li>
+            <li><a href="{% url 'register' %}" class="{% if request.path == '/register/' %}active{% endif %}">Register</a></li>
+          {% endif %}
+        </ul>
+
+        <div class="burger" id="burger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </nav>
+  {% endif %}
+
+    <!-- Main Content Container -->
+    <main class="container">
+      {% block content %}{% endblock %}
+
+      {% block description_and_cta %}
+          {% if request.resolver_match.url_name not in 'register login' %}
+
+      <section class="hero-section" data-aos="fade-up">
+        <div class="hero-text">
+            <h2 data-aos="fade-right">Master Your Knowledge</h2>
+            <p data-aos="fade-left" data-aos-delay="200">
+              Generate quizzes with AI, test your skills, and track your learning journey.
+            </p>
+            <a href="/quiz/create/" class="btn-primary" data-aos="zoom-in" data-aos-delay="400">
+              Create Your First Quiz
+            </a>
+
+        </div>
+      </section>
+
+          <section class="how-it-works-section container" id="how-it-works">
+          <h2 class="section-title" data-aos="fade-up">How to Create a Quiz</h2>
+          <div class="steps-wrapper">
+            <div class="step" data-aos="fade-up" data-aos-delay="100">
+              <span class="step-number">1</span>
+              <h3>Choose Topic & Difficulty</h3>
+              <p>Select your quiz topic, set difficulty level and number of questions.</p>
+            </div>
+            <div class="step" data-aos="fade-up" data-aos-delay="200">
+              <span class="step-number">2</span>
+              <h3>Generate with AI</h3>
+              <p>Click generate and let GPT-4 create your quiz questions instantly.</p>
+            </div>
+            <div class="step" data-aos="fade-up" data-aos-delay="300">
+              <span class="step-number">3</span>
+              <h3>Start Quiz & Get Scored</h3>
+              <p>Answer the questions, submit, and get scored immediately.</p>
+            </div>
+          </div>
+        </section>
+        <section class="active-users-section container" id="active-users">
+          <h2 class="section-title" data-aos="fade-up">Active Users</h2>
+          <div id="user-list" class="user-list" data-aos="fade-up" data-aos-delay="200">
+            Loading active users...
+          </div>
+        </section>
+
+          {% endif %}
+
+      {% endblock %}
+    </main>
+
+    <!-- Footer -->
+<hr style="border: none; height: 1px; background-color: #eaeaea; margin: 0;" />
+
+<footer class="footer">
+  <div class="footer-row">
+    <!-- Left: Logo -->
+    <div class="footer-brand">
+      <h2>SkillCheck</h2>
+      <p class="tagline">Build for Learners by Learners</p>
+    </div>
+
+    <!-- Center: Contact -->
+    <div class="footer-info">
+      <p>Email: support@skillcheck.com</p>
+      <p>Phone: +995 599 123 456</p>
+    </div>
+
+    <!-- Right: Socials -->
+    <div class="footer-socials">
+    <p class="footer-socials-label">Follow us on social media</p>
+      <a href="https://www.facebook.com/melano.beridze.2025"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/in/melano-beridze-2a035525a/"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 SkillCheck. Built for educational purposes only.</p>
+  </div>
+</footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="{% static 'quizapp/js/script.js' %}"></script>
+    <ul class="animated-bg">
+      <li></li><li></li><li></li><li></li><li></li>
+    </ul>
+<!-- Cookie Notification Banner -->
+<div id="cookie-banner" class="cookie-banner">
+  <p><i class="fas fa-cookie-bite" style="margin-right: 8px; color: #6c63ff;"></i>
+     This website uses cookies to ensure you get the best experience on SkillCheck.
+  </p>
+  <button id="accept-cookies" class="btn-primary">Accept</button>
+</div>
+
+
+  </body>
+</html>

@@ -1,0 +1,47 @@
+{% extends 'home/index.html' %}
+
+{% block description_and_cta %}
+{% endblock description_and_cta %}
+
+{% block content %}
+<section class="about-section container">
+  <div class="about-header" data-aos="fade-up">
+    <h2 class="section-title">About Us</h2>
+    <p class="section-subtitle">Discover our mission, vision, and the future we’re building with SkillCheck.</p>
+  </div>
+
+  <div class="horizontal-about-sections">
+    <div class="about-horizontal-block" data-aos="fade-up" data-aos-delay="100">
+      <h3>Our Mission</h3>
+      <p>
+        At SkillCheck, our mission is to democratize access to education through smart, AI-powered assessments.
+        We believe learning should be engaging, measurable, and personalized. Our platform empowers students,
+        educators, and lifelong learners to create, take, and analyze quizzes that reflect real knowledge growth.
+      </p>
+    </div>
+
+    <div class="about-horizontal-block" data-aos="fade-up" data-aos-delay="200">
+      <h3>Our Vision</h3>
+      <p>
+        We envision a world where knowledge is assessed not just by rote memorization, but by dynamic,
+        personalized tools that adapt to how you learn. SkillCheck aims to be the standard for skills-based
+        education platforms, accessible globally for all levels of learners.
+      </p>
+    </div>
+
+    <div class="about-horizontal-block" data-aos="fade-up" data-aos-delay="300">
+      <h3>Our Future Plan</h3>
+      <p>
+        Looking ahead, we plan to introduce collaborative quiz-building, gamification features, and analytics
+        dashboards that help both students and educators track progress more effectively. Our goal is to foster a
+        community-driven space for knowledge sharing and challenge-based learning.
+      </p>
+    </div>
+  </div>
+
+  <div class="about-cta" data-aos="zoom-in" data-aos-delay="400">
+    <p>Ready to be part of the future of learning?</p>
+    <a href="/quiz/create/" class="btn-primary">Create Your First Quiz</a>
+  </div>
+</section>
+{% endblock %}
